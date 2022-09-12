@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div class="header fixed">
+			<div class="header-container">
+				<p class="header-title">Bookshelf</p>
+				<button id="add-book-btn">+ Add Book</button>
+			</div>
+		</div>
+		<!-- header section end -->
+		<div class="bookshelf">
+			<div class="book-cards">
+				<div class="book-card">
+					<div class="book-remove">
+						<button class="remove-btn">X</button>
+					</div>
+					<div class="book-card-content">
+						<div class="book-title book-details">
+							<p>Pride and Prejudice</p>
+						</div>
+						<div class="book-author book-details">
+							<p>Jane Austen</p>
+						</div>
+						<div class="book-pages book-details">
+							<p>416 pages</p>
+						</div>
+						<div class="book-read">
+							<button id="read-btn">Read</button>
+						</div>
+					</div>
+				</div>
+				<!--  end of individual card    -->
+			</div>
+			<!--  end of cards area  -->
+		</div>
+		<!-- end of bookshelf end -->
+		<div class="add-form" id="modal">
+			<div class="form-card" id="modal-content">
+				<div class="book-remove">
+					<button class="remove-btn" id="close-btn">X</button>
+				</div>
+				<div class="form-title">
+					<p>Add new book</p>
+				</div>
+				<form action="" class="add-book-form">
+					<div class="form-field">
+						<input type="text" placeholder="Title" id="title" required />
+					</div>
+					<div class="form-field">
+						<input type="text" placeholder="Author" required />
+					</div>
+					<div class="form-field">
+						<input type="number" placeholder="Pages" required />
+					</div>
+					<button id="sub-btn" type="button">Add Book</button>
+				</form>
+			</div>
+		</div>
+		<script src="./script.js"></script>
+	</body>
+</html>
