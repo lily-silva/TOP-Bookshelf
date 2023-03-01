@@ -1,42 +1,56 @@
 "use strict";
 
 // variables
-const form = document.getElementById("add-book")
-const title = document.getElementById("title");
-const author = document.getElementById("author");
-const pages = document.getElementById("pages");
-const btn = document.getElementById("submit");
-const read = document.getElementById("read");
-const tbr = document.getElementById("tbr");
-
-const bookCont = document.getElementById("book-container");
-const bookCard = document.querySelector(".card");
-
-
-
+// a variable to store an array of objects added by the user
 let myLibrary = [];
-
 
 // methods
 
-function Book(title, author, pages, read, tbr) {
-	(this.title = title), (this.author = author), (this.pages = pages), (this.read = read), (this.tbr = tbr)
+// function that removes bookcard on x click
+function removeBookCard() {
+	const delBtns = document.querySelectorAll(".bi-x");
+	delBtns.forEach((button) => {
+		button.addEventListener("click", (event) => {
+			const bookCard = event.target.closest(".card");
+			bookCard.remove();
+		});
+	});
 }
 
-function addBookToLibrary(event) {
+// an object to store the book information
+function Book(title, author, pages, read, tbr) {
+	(this.title = title),
+		(this.author = author),
+		(this.pages = pages),
+		(this.read = read),
+		(this.tbr = tbr);
+}
 
+// function that will add a new book to the page when the form is submited
+function addBookToLibrary(event) {
+	// this prevents the default behaviour of the button to send the form content to the server
 	event.preventDefault();
 
+	// create a object to store the books added by the user from the form
+	const book = new Book(
+		document.getElementById("title").value,
+		document.getElementById("author").value,
+		document.getElementById("pages").value,
+		document.getElementById("read").checked,
+		document.getElementById("tbr").checked
+	);
+
+	// empty variables to hold the book data to be reused in the HTML
 	let bookTitle = "";
 	let bookAuthor = "";
 	let bookPages = "";
 	let bookRead = "";
 	let bookTBR = "";
 
-	const book = new Book(title.value, author.value, pages.value, read.checked, tbr.checked);
-
+	// this pushes the new book the used added to the "library" array
 	myLibrary.push(book);
 
+	// interated through the array and adds the books to the variables to be reused
 	myLibrary.forEach((el) => {
 		bookTitle = el.title;
 		bookAuthor = el.author;
@@ -45,6 +59,7 @@ function addBookToLibrary(event) {
 		bookTBR = el.tbr;
 	});
 
+	// Variable that holds the html to add the HTML of the new book card to the page, with the values pulled from the book object
 	const newBookCard = `
 	<div class="card">
 		<div class="card-body d-flex">
@@ -56,11 +71,15 @@ function addBookToLibrary(event) {
 				<p>${bookPages} <span class="text-secondary fst-italic fw-light book-md">pages</span></p>
 				<div class="d-flex col-12 gap-3">
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="read" id="read" ${bookRead ? "checked" : ""} />
+						<input class="form-check-input" type="checkbox" name="read" id="read" ${
+							bookRead ? "checked" : ""
+						} />
 						<label class="form-check-label" for="read">read</label>
 					</div>
 					<div class="form-check">
-						<input class="form-check-input" type="checkbox" name="read" id="tbr" ${bookTBR ? "checked" : ""} /> <label class="form-check-label" for="tbr">to read</label>
+						<input class="form-check-input" type="checkbox" name="read" id="tbr" ${
+							bookTBR ? "checked" : ""
+						} /> <label class="form-check-label" for="tbr">to read</label>
 					</div>
 				</div>
 			</div>
@@ -69,34 +88,21 @@ function addBookToLibrary(event) {
 		</div>
 		</div>
 
-	</div>	
-	`
-	bookCont.insertAdjacentHTML('beforeend', newBookCard);
+	</div>`;
 
+	// Adds the new book to the page
+	document
+		.getElementById("book-container")
+		.insertAdjacentHTML("beforeend", newBookCard);
+	removeBookCard();
 
+	// reset form inputs after submit
+	document.getElementById("add-book-form").reset();
 }
 
 // inits & event listeners
-const removeBtn = document.querySelectorAll(".bah");
-form.addEventListener("submit", addBookToLibrary)
 
-const bah = document.getElementById("bah").addEventListener("click", () => {
-	console.log(removeBtn)
-})
-
-function setup() {
-	var els = document.getElementById("bah");
-	for (var i = 0; i < els.length; i++) {
-		els[i].addEventListener('click', function (e) {
-
-			bookCard.remove();
-			//e.target.closest('.image').remove();
-			
-			//this will not work on 2 last images cause parent div will be deleted 
-			//leaving an empty <div class="image"></div> for each removed item
-			
-			//e.target.closest('div').remove();
-		});
-	}
-}
-setup();
+// gets the form and adds a submit event listener to call the function that will add the new book to the page
+document
+	.getElementById("add-book-form")
+	.addEventListener("submit", addBookToLibrary);
