@@ -18,6 +18,7 @@ To use this project on your local machine, you will need to perform the followin
 1. Clone the repository to your local machine.
 2. Open the project in your code editor.
 3. Open the index.html file in your web browser.
+4. Navigate to [https://lily-silva.github.io/TOP-Bookshelf/](https://lily-silva.github.io/TOP-Bookshelf/)
 
 ## Adding Books
 
