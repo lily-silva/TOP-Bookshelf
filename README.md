@@ -18,7 +18,6 @@ To use this project on your local machine, you will need to perform the followin
 1. Clone the repository to your local machine.
 2. Open the project in your code editor.
 3. Open the index.html file in your web browser.
-   Usage
 
 ## Adding Books
 
